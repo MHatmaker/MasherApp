@@ -1,10 +1,11 @@
-
+/* 
 (function() {
     "use strict";
-
+ */
     console.log('AppController setup');
     define([
         'angular',
+        'app',
         'controllers/MasherCtrl',
         'controllers/TabsCtrl',
         'controllers/MapCtrl',
@@ -14,11 +15,18 @@
         'controllers/SearcherCtrlMap',
         'controllers/StompSetupCtrl'
         ], 
-    function(angular, MasherCtrl, TabsCtrl, MapCtrl, VerbageCtrl, SPACtrl, SearcherCtrlGrp, SearcherCtrlMap, StompSetupCtrl) {
+    function(angular, app, MasherCtrl, TabsCtrl, MapCtrl, VerbageCtrl, SPACtrl, SearcherCtrlGrp, SearcherCtrlMap, StompSetupCtrl) {
         console.log('AppController define');
 
         function AppController($scope) {}
             
+      // define our controller and register it with our app
+        app.controller("AppController", function($scope){
+            // $scope.title = "Hello World";
+            console.log("AppController - call init(App)");
+        });
+        
+        init(app);
         function init(App) {
             console.log('AppController init');
             MasherCtrl.start(App);
@@ -29,11 +37,11 @@
             SearcherCtrlGrp.start(App);
             SearcherCtrlMap.start(App);
             StompSetupCtrl.start(App);
-            return AppController;
         }
 
         return { start: init };
 
     });
-
+/* 
 }).call(this);
+ */
