@@ -7,6 +7,7 @@
     
     var locationPath = "";
     var pathRX = new RegExp(/\/[^\/]+$/), locationPath = location.pathname.replace(pathRX, '');
+    console.log(locationPath);
 
   // register a module called "angular" so we can use it with "require" later
     define('angular', function () {
@@ -20,6 +21,7 @@
     require({
         async: true,
         //aliases: [['text', 'dojo/text']],
+       /*  
         packages: [{
           name: 'app',
           location: locationPath + 'javascripts'
@@ -36,13 +38,8 @@
             name: 'javascripts',
             location: locationPath + 'javascripts'
         }
-      /*   
-        {
-            name: 'bootstrap',
-            location: locationPath + 'javascripts'
-        }
-         */
         ]
+         */
     });
 
 

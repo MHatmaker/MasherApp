@@ -175,6 +175,7 @@ urls = (
         self.app.use(cookieParser());
         // app.use(express.static(path.join(__dirname, 'public')));
         self.app.use(express.static(__dirname + '/public'));
+        console.log("use dirname " + __dirname + '/public');
         //self.app.use(self.app.router);    DEPRECATED
     };
 

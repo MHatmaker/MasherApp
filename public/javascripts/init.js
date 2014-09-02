@@ -8,7 +8,7 @@ require([
     'javascripts/controllers/AppController',
     'javascripts/controllers/MasherCtrl',
     'javascripts/controllers/MapCtrl'
-], function(angular, dojo, domReady, esriPortal) {
+], function(angular, dojo, domReady, esriPortal, AppController, MasherCtrl, MapCtrl) {
     var App = angular.module("app");
     
     App.config(['$routeProvider', '$locationProvider',
@@ -46,13 +46,13 @@ require([
         }
     ]);
         
-        domReady(function () {
+        //domReady(function () {
             var portal, portalUrl = document.location.protocol + '//www.arcgis.com';
             portal = new esri.arcgis.Portal(portalUrl);
             console.info('started the portal');
             readyForSearchGrid(portal);
             readyForSearchGridMap(portal);
-        });
+        //});
 
   // since we didn't include ng-app anywhere in our HTML angular hasn't started yet
   // angular.bootstrap is the same as putting ng-app="app" on the body, but we control when it is called

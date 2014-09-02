@@ -8,6 +8,11 @@ exports.index = function(req, res){
 
 exports.agonewwindow = function(req, res){
   console.log("exports.agonewwindow");
+  console.log("params, then query");
+  console.log(req.params);
+  console.log(req.query);
+  console.log(req.baseUrl);
+  //console.log(req);
   res.render('agonewwindow');
 };
 
