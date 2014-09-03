@@ -1,7 +1,7 @@
-/* 
+
 (function() {
     "use strict";
- */
+ 
     console.log('AppController setup');
     define([
         'angular',
@@ -42,6 +42,5 @@
         return { start: init };
 
     });
-/* 
+
 }).call(this);
- */

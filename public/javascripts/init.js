@@ -1,14 +1,16 @@
 // lets require all our apps components before initalizing our app
-require([
+define([
     'angular',
-    "dojo",
-    "dojo/domReady",
-    "esri/arcgis/Portal", 
-    'javascripts',
+    //"dojo",
+    // "dojo/domReady",
+    // "esri/arcgis/Portal", 
+    //'javascripts',
+    'esriarcgisportal',
     'javascripts/controllers/AppController',
     'javascripts/controllers/MasherCtrl',
     'javascripts/controllers/MapCtrl'
-], function(angular, dojo, domReady, esriPortal, AppController, MasherCtrl, MapCtrl) {
+// ], function(angular, dojo, domReady, esriPortal, AppController, MasherCtrl, MapCtrl) {
+], function(angular, esriarcgisportal, AppController, MasherCtrl, MapCtrl) {
     var App = angular.module("app");
     
     App.config(['$routeProvider', '$locationProvider',

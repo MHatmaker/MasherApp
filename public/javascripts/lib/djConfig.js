@@ -1,36 +1,49 @@
 var dojoConfig = {
-    //async: true,
-    // parseOnLoad: true, 
+    async: true,
+    baseUrl:  "/javascripts/", //ajax.googleapis.com/ajax/libs/dojo/1.9.3/" 
+    parseOnLoad: true, 
     tlmSiblingOfDojo: false,
+    
+        packages: [{
+          name: 'dojo',
+          location: getLocationPath('//serverapi.arcgisonline.com/jsapi/arcgis/?v=3.5compact')
+        }
+        ],
+    /* 
         packages: [{
           name: 'app',
-          location: location.pathname + 'javascripts'
+          location: getLocationPath('javascripts')
         },
         {
             name: 'controllers',
-            location: location.pathname + 'javascripts/controllers'
+            location: getLocationPath('javascripts/controllers')
         }, 
         {
             name: 'lib',
-            location: location.pathname + 'javascripts/lib'
+            location: getLocationPath('javascripts/lib')
         },
         {
             name: 'javascripts',
-            location: location.pathname + 'javascripts'
+            location: getLocationPath('javascripts')
         }
-      /*   
-        {
-            name: 'bootstrap',
-            location: location.pathname + 'javascripts'
-        }
-         */
         ],
+         */
     map: {
         // Instead of having to type "dojo/domReady!", we just want "ready!" instead
+        
         "*": {
-            ready: "dojo/domReady"
+            ready: "dojo/domReady",
+            esriarcgisportal: "esri/arcgis/Portal"
         }
-    } //,
-     
-    // baseUrl:  "//ajax.googleapis.com/ajax/libs/dojo/1.9.3/" 
-    };
+        }
+
+};
+
+function getLocationPath(addon){
+  // get the root path from the URL
+    
+    var locationPath = "";
+    var pathRX = new RegExp(/\/[^\/]+$/), locationPath = location.pathname.replace(pathRX, '');
+    console.log(locationPath + addon);
+    return locationPath + addon;
+}
