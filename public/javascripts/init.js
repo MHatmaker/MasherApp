@@ -1,17 +1,24 @@
+
+
+(function() {
+    "use strict";
+
+    console.debug('init bootstrap setup method');
+
 // lets require all our apps components before initalizing our app
 define([
-    'angular',
+    'lib/angular/angular',
     //"dojo",
     // "dojo/domReady",
     // "esri/arcgis/Portal", 
     //'javascripts',
     'esriarcgisportal',
-    'javascripts/controllers/AppController',
-    'javascripts/controllers/MasherCtrl',
-    'javascripts/controllers/MapCtrl'
+    'controllers/AppController',
+    'controllers/MasherCtrl',
+    'controllers/MapCtrl'
 // ], function(angular, dojo, domReady, esriPortal, AppController, MasherCtrl, MapCtrl) {
 ], function(angular, esriarcgisportal, AppController, MasherCtrl, MapCtrl) {
-    var App = angular.module("app");
+    var App = angular.module("app"); //, ['ngRoute', 'ui.bootstrap', 'ngGrid']);
     
     App.config(['$routeProvider', '$locationProvider',
     function($routeProvider, $locationProvider, AppController, MasherCtrl, MapCtrl) {
@@ -61,3 +68,5 @@ define([
   // need to bootstrap angular since we wait for dojo/DOM to load
   angular.bootstrap(document.body, ['app']);
 });
+
+}).call(this);

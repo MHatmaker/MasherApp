@@ -12,7 +12,7 @@ function getDocHeight() {
     "use strict";
 
     console.log('SPACtrl setup');
-    define(['angular'], function(angular) {
+    define(['lib/angular/angular'], function(angular) {
         console.log('SPACtrl define');
         
         function SPACtrl($scope) {

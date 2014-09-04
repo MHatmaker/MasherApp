@@ -5,26 +5,24 @@
     console.log('StartupGArcGIS setup');
     require(['lib/MapHosterArcGIS']);
         
-    dojo.require("esri.map");
-    dojo.require("dijit.layout.BorderContainer");
-    dojo.require("dijit.layout.AccordionContainer");
-    dojo.require("dijit.layout.AccordionPane");
-    dojo.require("dijit.layout.ContentPane");
-    dojo.require("esri.tasks.geometry");
-    dojo.require("esri.IdentityManager");
-    dojo.require("esri.dijit.Scalebar");
-    dojo.require("esri.arcgis.utils");
-    dojo.require("dgrid.Grid");
-    dojo.require("dgrid/Selection");
-    // dojo.require("esri.arcgis.Portal");
-    dojo.require("dijit.Dialog");
-    dojo.require("dojo.parser");
+    require(["arcgisonline/esri/map"]);
+    require(["dojo/dijit/layout/BorderContainer"]);
+    require(["dojo/dijit/layout/AccordionContainer"]);
+    require(["dojo/dijit/layout/AccordionPane"]);
+    require(["dojo/dijit/layout/ContentPane"]);
+    require(["arcgisonline/esri/tasks/geometry"]);
+    require(["arcgisonline/esri/IdentityManager"]);
+    require(["arcgisonline/esri/dijit/Scalebar"]);
+    require(["arcgisonline/esri/arcgis/utils"]);
+    // require(["esri/arcgis/Portal"]);
+    require(["dojo/dijit/Dialog"]);
+    require(["dojo/dojo/parser"]);
     
     define([
         'lib/MapHosterArcGIS',
         'controllers/StompSetupCtrl',
-        'angular',
-        'esri/map'
+        'lib/angular/angular',
+        'arcgisonline/esri/map'
     ], function(MapHosterArcGIS, StompSetupCtrl) {
         console.log('StartupArcGIS defined');
         

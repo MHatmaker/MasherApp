@@ -5,7 +5,7 @@
 
     console.log('StompSetup setup');
     define([
-        'angular',
+        'lib/angular/angular',
         'lib/MapHosterArcGIS'
     ], function(angular, MapHosterArcGIS) {
         console.log('SearcherCtrlMap define');  

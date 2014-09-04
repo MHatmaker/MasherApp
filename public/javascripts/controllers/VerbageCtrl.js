@@ -6,7 +6,7 @@
     "use strict";
 
     console.log('VerbageCtrl setup');
-    define(['angular'], function(angular) {
+    define(['lib/angular/angular'], function(angular) {
         console.log('VerbageCtrl define');
         
         function VerbageCtrl($scope) {

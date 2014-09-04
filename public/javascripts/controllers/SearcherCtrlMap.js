@@ -8,7 +8,7 @@ angular.isUndefinedOrNull = function(val) {
 
     console.log('SearcherCtrlMap setup');
     define([
-        'angular',
+        'lib/angular/angular',
         'lib/StartupArcGIS'
     ], function(angular, StartupArcGIS) {
         console.log('SearcherCtrlMap define');

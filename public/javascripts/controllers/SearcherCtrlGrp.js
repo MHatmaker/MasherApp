@@ -4,7 +4,7 @@
 
     console.log('SearcherCtrlGrp setup');
     define([
-        'angular' //,
+        'lib/angular/angular' //,
         // 'CurrentWebMapIdService'  //,
         // 'ngGrid'
     ], function(angular) {

@@ -8,9 +8,9 @@
 
 (function() {
     "use strict";
-    require(["lib/utils", 'angular']);
+    require(["lib/utils", 'lib/angular/angular']);
 
-    define(['http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js', 'angular'], function(leaflet, angular) {
+    define(['http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js', 'lib/angular/angular'], function(leaflet, angular) {
 
         var mph = null,
             scale2Level = [],

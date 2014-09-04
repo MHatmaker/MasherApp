@@ -7,11 +7,11 @@
 
 (function() {
     "use strict";
-    require(["lib/utils", 'angular']);
+    require(["lib/utils", 'lib/angular/angular']);
 
     define([
         // 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAwAOGAxY5PZ8MshDtaJFk2KgK7VYxArPA', 
-        'angular'
+        'lib/angular/angular'
         // 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAwAOGAxY5PZ8MshDtaJFk2KgK7VYxArPA&callback=skipScript'
         ], function(angular) {
 

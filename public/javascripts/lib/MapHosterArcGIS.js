@@ -1,10 +1,10 @@
 
 (function() {
     "use strict";
-    require(["lib/utils", 'angular']);
+    require(["lib/utils", 'lib/angular/angular']);
 
     define([
-        'angular'
+        'lib/angular/angular'
         ], function(angular) {
 
         var mph = null,

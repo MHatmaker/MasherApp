@@ -3,7 +3,7 @@
     "use strict";
 
     console.log('MasherCtrl setup');
-    define(['angular'], function(angular) {
+    define(['lib/angular/angular'], function(angular) {
         console.log('MasherCtrl define');
         
         function MasherCtrl($scope) {

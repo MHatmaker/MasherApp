@@ -6,6 +6,7 @@ public/javascripts/lib/Control.Loading.js
 public/javascripts/lib/Orb*
 public/javascripts/lib/jquery*
 public/javascripts/EsriSample.js
+public/javascripts/require.js
 public/javascripts/PortalExample.html
 public/javascripts/controllers/TabsInfoCommented.js
 public/javascripts/Incrementer.html

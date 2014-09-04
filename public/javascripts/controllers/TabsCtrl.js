@@ -21,7 +21,7 @@ String.format = function() {
     "use strict";
 
     console.log('TabsCtrl setup');
-    define(['angular'], function(angular) {
+    define(['lib/angular/angular'], function(angular) {
         console.log('TabsCtrl define');
 
         function TabsCtrl($scope) {
