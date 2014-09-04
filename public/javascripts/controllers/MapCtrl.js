@@ -5,7 +5,7 @@
     console.log('MapCtrl setup');
     define([
         'lib/angular/angular',
-        'arcgisonline/esri/map',
+        'arcgisonline/js/esri/map',
         'lib/StartupLeaflet',
         'lib/StartupGoogle',
         'lib/StartupArcGIS'

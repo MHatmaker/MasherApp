@@ -5,15 +5,15 @@
     console.log('StartupGArcGIS setup');
     require(['lib/MapHosterArcGIS']);
         
-    require(["arcgisonline/esri/map"]);
+    require(["arcgisonline/js/esri/map"]);
     require(["dojo/dijit/layout/BorderContainer"]);
     require(["dojo/dijit/layout/AccordionContainer"]);
     require(["dojo/dijit/layout/AccordionPane"]);
     require(["dojo/dijit/layout/ContentPane"]);
-    require(["arcgisonline/esri/tasks/geometry"]);
-    require(["arcgisonline/esri/IdentityManager"]);
-    require(["arcgisonline/esri/dijit/Scalebar"]);
-    require(["arcgisonline/esri/arcgis/utils"]);
+    require(["arcgisonline/js/esri/tasks/geometry"]);
+    require(["arcgisonline/js/esri/IdentityManager"]);
+    require(["arcgisonline/js/esri/dijit/Scalebar"]);
+    require(["arcgisonline/js/esri/arcgis/utils"]);
     // require(["esri/arcgis/Portal"]);
     require(["dojo/dijit/Dialog"]);
     require(["dojo/dojo/parser"]);
@@ -22,7 +22,7 @@
         'lib/MapHosterArcGIS',
         'controllers/StompSetupCtrl',
         'lib/angular/angular',
-        'arcgisonline/esri/map'
+        'arcgisonline/js/esri/map'
     ], function(MapHosterArcGIS, StompSetupCtrl) {
         console.log('StartupArcGIS defined');
         

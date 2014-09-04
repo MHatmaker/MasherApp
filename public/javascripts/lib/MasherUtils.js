@@ -5,7 +5,7 @@
     console.log('MasherUtils setup');
     define([
         'lib/angular/angular',
-        'arcgisonline/esri/map',
+        'arcgisonline/js/esri/map',
         'dijit/Dialog'
     ], function(angular, Map) {
         console.log('MasherUtils define');

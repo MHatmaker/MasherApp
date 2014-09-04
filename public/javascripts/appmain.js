@@ -9,7 +9,7 @@ requirejs.config({
         lib: './lib',
         controllers: 'controllers',
         angular: 'lib/angular/angular',
-        arcgisonline: 'http://serverapi.arcgisonline.com/jsapi/arcgis/3.5compact/js',
+        arcgisonline: 'http://serverapi.arcgisonline.com/jsapi/arcgis/3.5compact',
         esriarcgisportal: 'http://serverapi.arcgisonline.com/jsapi/arcgis/3.5compact/js/esri/arcgis/Portal',
         dojo: 'http://serverapi.arcgisonline.com/jsapi/arcgis/3.5compact/js/dojo'
     },
@@ -36,7 +36,7 @@ requirejs.config({
             exports: 'http://serverapi.arcgisonline.com/jsapi/arcgis/3.5compact/js/esri/arcgis/Portal'
         },
         arcgisonline: {
-            exports: 'http://serverapi.arcgisonline.com/jsapi/arcgis/3.5compact/js'
+            exports: 'http://serverapi.arcgisonline.com/jsapi/arcgis/3.5compact'
         },
         dojo: {
             exports: 'http://serverapi.arcgisonline.com/jsapi/arcgis/?v=3.5compact/js/dojo'
@@ -53,5 +53,5 @@ define(['angular'], function(angular){
 });
      */
     
-requirejs(['lib/angular/angular', 'init', 'esriarcgisportal']);
+requirejs(['lib/angular/angular', 'init', 'esriarcgisportal', 'http://serverapi.arcgisonline.com/jsapi/arcgis/3.5compact']);
 
