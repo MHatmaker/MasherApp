@@ -4,6 +4,7 @@
  
     console.log('AppController setup');
     define([
+        'angular',
         'controllers/MasherCtrl',
         'controllers/TabsCtrl',
         'controllers/MapCtrl',
@@ -13,7 +14,7 @@
         'controllers/SearcherCtrlMap',
         'controllers/StompSetupCtrl'
         ], 
-    function( MasherCtrl, TabsCtrl, MapCtrl, VerbageCtrl, SPACtrl, SearcherCtrlGrp, SearcherCtrlMap, StompSetupCtrl) {
+    function(angular, MasherCtrl, TabsCtrl, MapCtrl, VerbageCtrl, SPACtrl, SearcherCtrlGrp, SearcherCtrlMap, StompSetupCtrl) {
         console.log('AppController define');
 
         //function AppController($scope) 

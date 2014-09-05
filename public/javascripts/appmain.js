@@ -3,21 +3,25 @@
 // Configure loading modules from the lib directory,
 // except for 'app' ones, which are in a sibling
 // directory.
-requirejs.config({
+
+(function() {
+
+require.config({
     baseUrl: 'javascripts',
     paths: {
         lib: './lib',
         controllers: 'controllers',
-        angular: 'lib/angular/angular'/*   ,
+        angular: 'lib/angular/angular',
         arcgisonline: 'http://serverapi.arcgisonline.com/jsapi/arcgis/3.5compact',
         esriarcgisportal: 'http://serverapi.arcgisonline.com/jsapi/arcgis/3.5compact/js/esri/arcgis/Portal',
-        dojo: 'http://serverapi.arcgisonline.com/jsapi/arcgis/3.5compact/js/dojo'
-         */
+        //dojo: 'http://serverapi.arcgisonline.com/jsapi/arcgis/3.5compact/js/dojo'
     },
+  
     packages: [
         {
            name: 'dojo',
-           location: "http://serverapi.arcgisonline.com/jsapi/arcgis/3.5compact/js/dojo/dojo/"
+           location: "http://serverapi.arcgisonline.com/jsapi/arcgis/3.5compact/js/dojo/dojo/",
+           main:'dojo/main' 
         },
         {
            name: 'dojox',
@@ -32,6 +36,7 @@ requirejs.config({
            location: "http://serverapi.arcgisonline.com/jsapi/arcgis/3.5compact/js/esri"
         }
     ],
+     
     shim: {
         main: {
             //deps: ['jquery', 'underscore'],
@@ -52,5 +57,12 @@ define(['angular'], function(angular){
 });
      */
     
-requirejs(['angular', 'init', 'dojo', 'esri']);
+require(['setup', 'lib/angular/angular', 'init', 'http://serverapi.arcgisonline.com/jsapi/arcgis/3.5compact',  'esriarcgisportal'], function(AppInit) {
+    console.log('init app');
+    return AppInit.initialize();
+    }
+);
+
+
+}).call(this);
 

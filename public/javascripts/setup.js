@@ -1,7 +1,7 @@
 /*global angular:true */
 
-(function(angular){
-    'use strict';
+// (function(angular){
+    // 'use strict';
 
   // get the root path from the URL
     
@@ -11,11 +11,13 @@
 
   // register a module called "angular" so we can use it with "require" later
     define('angular', function () {
+        console.log("defining angular");
         if (angular) {
+            console.debug(angular);
             return angular;
         }
         return {};
     });
 
 
-}(angular));
+// }(angular));

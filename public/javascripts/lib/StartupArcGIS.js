@@ -6,17 +6,17 @@
     require(['lib/MapHosterArcGIS']);
         
     require(["arcgisonline/js/esri/map"]);
-    require(["dojo/dijit/layout/BorderContainer"]);
-    require(["dojo/dijit/layout/AccordionContainer"]);
-    require(["dojo/dijit/layout/AccordionPane"]);
-    require(["dojo/dijit/layout/ContentPane"]);
+    require(["dijit/layout/BorderContainer"]);
+    require(["dijit/layout/AccordionContainer"]);
+    require(["dijit/layout/AccordionPane"]);
+    require(["dijit/layout/ContentPane"]);
     require(["arcgisonline/js/esri/tasks/geometry"]);
     require(["arcgisonline/js/esri/IdentityManager"]);
     require(["arcgisonline/js/esri/dijit/Scalebar"]);
     require(["arcgisonline/js/esri/arcgis/utils"]);
     // require(["esri/arcgis/Portal"]);
-    require(["dojo/dijit/Dialog"]);
-    require(["dojo/dojo/parser"]);
+    require(["dijit/Dialog"]);
+    require(["dojo/parser"]);
     
     define([
         'lib/MapHosterArcGIS',
