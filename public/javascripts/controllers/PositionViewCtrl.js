@@ -40,7 +40,8 @@
             
             $scope.currentViewOption = $scope.viewOptions[2]; 
             // $scope.positionView = "position info";
-            posViewTextElement = angular.element(document.getElementById('mppos'));
+            // posViewTextElement = angular.element(document.getElementById('mppos'));
+            posViewTextElement = document.getElementById('mppos');
             
             $scope.updateDetails = {
                 'zm' : function(opt){curDetails['zm'] = opt['zm']; curDetails['scl'] = opt['scl'];},
@@ -65,7 +66,8 @@
                     // console.log("old : " + $scope.positionView + " new " + formatted);'];
                     console.log("old : " + posViewTextElement.value + " new " + formatted);
                     // $scope.positionView = formatted;
-                    posViewTextElement = angular.element(document.getElementById('mppos'));
+                    // posViewTextElement = angular.element(document.getElementById('mppos'));
+                    posViewTextElement = document.getElementById('mppos');
                     posViewTextElement.value = formatted;
                 }
             };

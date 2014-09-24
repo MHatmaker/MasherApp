@@ -10,9 +10,9 @@
     "use strict";
     require(["lib/utils", 'angular']);
 
-    define(['http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js', 'angular', 'controllers/PositionViewCtrl'], 
+    define(['http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js', 'angular'], 
     
-        function(leaflet, angular, PositionViewCtrl) {
+        function(leaflet, angular) {
 
         var scale2Level = [],
             zmG,
@@ -75,7 +75,7 @@
                 });
             
             mphmap.on("moveend", function( e ) {
-                setBounds('pan', e.latlng);}  );
+                setBounds('pan');}  );
             // mphmap.on("loading", function( e ) {
                 // showLoading()};  );
             // mphmap.on("load", function( e ) {
@@ -99,12 +99,15 @@
             var fixedCntrLL = utils.toFixed(cntr.lng,cntr.lat, 3);
             var cntrlng = fixedCntrLL.lon;
             var cntrlat = fixedCntrLL.lat;
-          /*   
-            var view = "Zoom : " + zm + " Scale : " + scale2Level[zm].scale + " Center : " + cntrlng + ", " + cntrlat + " Current: " + evlng + ", " + evlat;
+            
+            var view =  " Current Position: " + evlng + ", " + evlat;
+            var el = document.getElementById("mppos");
+            console.debug(el);
             document.getElementById("mppos").value = view;
-             */
+            console.debug(el);
+            
             // e.originalEvent.preventDefault();
-             
+             /* 
             PositionViewCtrl.update('coords', {
                 'zm' : zm,
                 'scl' : scale2Level[zm].scale,
@@ -113,6 +116,7 @@
                 'evlng' : evlng,
                 'evlat' : evlat
             });
+             */
             // var scope = angular.element(document.getElementById('mppos')).scope();
             // scope.$apply();
             console.log("returned from PositionViewCtrl.update");
@@ -128,12 +132,12 @@
                 .openOn(mphmap);
         }
 
-        function setBounds(action, latlng)
+        function setBounds(action)
         {
             // if(self.pusher && self.pusher.ready == true)
             {
                 // runs this code after finishing the zoom
-                var xtExt = extractBounds(action, latlng);
+                var xtExt = extractBounds(action, null);
                 var xtntJsonStr = JSON.stringify(xtExt);
                 console.log("extracted bounds " + xtntJsonStr);
                 var cmp = compareExtents("setBounds", xtExt);
@@ -151,13 +155,12 @@
             }
         }
         
-        function extractBounds(action, latlng)
+        function extractBounds(action)
         {
             var zm = mphmap.getZoom();
             var scale = mphmap.options.crs.scale(zm);
             var oldMapCenter = mphmapCenter;
             mphmapCenter = mphmap.getCenter();
-            // var cntr = action == 'pan' ? latlng : mphmap.getCenter();
             var cntr = mphmap.getCenter();
             var fixedLL = utils.toFixed(cntr.lng,cntr.lat, 3);
             var xtntDict = {'src' : 'leaflet_osm', 
@@ -175,7 +178,7 @@
             var zm = xj.zoom
             var cmp = compareExtents("retrievedBounds", {'zoom' : zm, 'lon' : xj.lon, 'lat' : xj.lat});
             var view = xj.lon + ", " + xj.lat + " : " + zm + " " + scale2Level[zm].scale;
-            document.getElementById("mppos").innerHTML = view;
+            document.getElementById("mppos").value = view;
             if(cmp == false)
             {
                 var tmpLon = cntrxG;
@@ -234,7 +237,13 @@
                 gmBounds.ymax = ne.lat;
             }
             zmG = zm; cntrxG = cntrx; cntryG = cntry;
-            console.log("Updated Globals " + msg + " " + cntrxG + ", " + cntryG + " : " + zmG);
+            console.log("Updated Globals " + msg + " " + cntrx + ", " + cntry + " : " + zm);
+            var view = "Zoom : " + zm + " Center : " + cntrx + ", " + cntry;
+            var el = document.getElementById("mppos");
+            console.debug(el);
+            document.getElementById("mppos").value = view;
+            console.debug(el);
+            /* 
             PositionViewCtrl.update('zm', {
                 'zm' : zmG,
                 'scl' : scale2Level.length > 0 ? scale2Level[zmG].scale : 3,
@@ -243,6 +252,7 @@
                 'evlng' : cntrxG,
                 'evlat' : cntryG
             });
+             */
         }
 
         function showGlobals(cntxt)

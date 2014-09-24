@@ -7,7 +7,7 @@
         'angular',
         'controllers/MasherCtrl',
         'controllers/TabsCtrl',
-        'controllers/PositionViewCtrl',
+        // 'controllers/PositionViewCtrl',
         'controllers/MapCtrl',
         'controllers/VerbageCtrl',
         'controllers/SPACtrl',
@@ -15,7 +15,7 @@
         'controllers/SearcherCtrlMap',
         'controllers/StompSetupCtrl'
         ], 
-    function(angular, MasherCtrl, TabsCtrl, PositionViewCtrl, MapCtrl, VerbageCtrl, SPACtrl,
+    function(angular, MasherCtrl, TabsCtrl, /* PositionViewCtrl, */ MapCtrl, VerbageCtrl, SPACtrl,
             SearcherCtrlGrp, SearcherCtrlMap, StompSetupCtrl) {
         console.log('AppController define');
 
@@ -25,7 +25,7 @@
             console.log('AppController init');
             MasherCtrl.start(App);
             TabsCtrl.start(App);
-            PositionViewCtrl.start(App);
+            // PositionViewCtrl.start(App);
             MapCtrl.start(App);
             SPACtrl.start(App);
             VerbageCtrl.start(App);
