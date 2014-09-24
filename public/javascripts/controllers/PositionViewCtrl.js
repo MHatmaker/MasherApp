@@ -16,6 +16,7 @@
             evlng : 'evlng',
             evlat : 'evlat'
         };
+        var posViewTextElement = null;
         function PositionViewCtrl($scope) {
             console.debug('PositionViewCtrl - initialize dropdown for position selections');
             
@@ -38,7 +39,8 @@
             ];
             
             $scope.currentViewOption = $scope.viewOptions[2]; 
-            $scope.positionView = "position info";
+            // $scope.positionView = "position info";
+            posViewTextElement = angular.element(document.getElementById('mppos'));
             
             $scope.updateDetails = {
                 'zm' : function(opt){curDetails['zm'] = opt['zm']; curDetails['scl'] = opt['scl'];},
@@ -48,16 +50,23 @@
             $scope.formatView = {
                 'zm' : function(zlevel){
                     var formatted = "Zoom : " + zlevel['zm'] + " Scale : " + zlevel['scl'];
-                    $scope.positionView = formatted;
+                    console.log("old : " + posViewTextElement.value + " new " + formatted);
+                    // $scope.positionView = formatted;
+                    posViewTextElement.value = formatted;
                 },
                 'cntr' : function(cntr) {
                     var formatted  = cntr['cntrlng'] + ', ' + cntr['cntrlat'];
-                    $scope.positionView = formatted;
+                    console.log("old : " + posViewTextElement.value + " new " + formatted);
+                    // $scope.positionView = formatted;
+                    posViewTextElement.value = formatted;
                 },
                 'coords' : function(evnt) {
                     var formatted  = evnt['evlng'] + ', ' + evnt['evlat'];
-                    console.log("old : " + $scope.positionView + " new " + formatted);
-                    $scope.positionView = formatted;
+                    // console.log("old : " + $scope.positionView + " new " + formatted);'];
+                    console.log("old : " + posViewTextElement.value + " new " + formatted);
+                    // $scope.positionView = formatted;
+                    posViewTextElement = angular.element(document.getElementById('mppos'));
+                    posViewTextElement.value = formatted;
                 }
             };
             var curKey = 'coords';
@@ -82,7 +91,8 @@
                 }
                 if(key = $scope.currentViewOption.key){
                     console.log("calling $apply()");
-                    $scope.$apply( $scope.formatView[key](val));
+                    // $scope.$apply( $scope.formatView[key](val));
+                    $scope.formatView[key](val);
                     //angular.element("mppos").scope().$apply();
                 }
             };
