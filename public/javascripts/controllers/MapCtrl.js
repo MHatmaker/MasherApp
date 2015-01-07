@@ -79,6 +79,7 @@
             $scope.isMapExpanded = false;
             console.debug($scope.map);
             // resizeMap($scope.isMapExpanded, $scope.map);
+            
             currentMapType.resizeWebSite($scope.isMapExpanded);
             
             var tmpltName = $routeParams.id;

@@ -203,17 +203,20 @@ function initPlaces() {
                             function(){
                                 console.log('google-loader has been loaded, but not the maps-API ');});
                 // mph = new MapHosterGoogle(gMap); 
-                testVar = isGoogleLoaded;
-                waitForGoogle(isGoogleLoaded);
-                
+                // testVar = isGoogleLoaded;
+                // while(testVar == false){
+                    // waitForGoogle(isGoogleLoaded);
+                // }
                 var placesLoadedUrl = 'https://maps.googleapis.com/maps/api/js?libraries=places&callback=initPlaces';
                 
                 loadScript(placesLoadedUrl, isPlacesLoaded,
                             function(){
                                 console.log('google-loader has been loaded, but not the places-API ');});
                                 
-                testVar = isPlacesLoaded;                                   
-                waitForGoogle(isPlacesLoaded);
+                // testVar = isPlacesLoaded;
+                // while(testVar == false){
+                    // waitForGoogle(isPlacesLoaded);
+                // }    
                          /*        
                 mph = MapHosterGoogle.start(); 
                 googleComponents['google'] = google;
