@@ -1,20 +1,20 @@
 (function() {
     "use strict";
 
-    console.log('GoogleSearchDirective setup');
+    console.log('googleSearchDirective setup');
     define([
         'angular'
     ], function(angular) {
-        console.log('GoogleSearchDirective define'); 
+        console.log('googleSearchDirective define'); 
         
         function init(App) {
-            console.log('GoogleSearchDirective init');
-            App.directive('GoogleSearchDirective', function ($compile){
+            console.log('googleSearchDirective init');
+            App.directive('googleSearchDirective', function ($compile){
                 return {
                   template: '<input id="pac-input" class="gmsearchcontrols" type="text" placeholder="Search Box">',
                   replace: true,
                   link: function(scope, element) {
-                    element.after($compile('<gmsearch></gmsearcht>')(scope));
+                    element.after($compile('<google-search-directive></google-search-directive>')(scope));
                   }
                 }
               });
@@ -26,7 +26,7 @@
 
 }).call(this);
 
-       
+/*   
 
 angular.module("main", []).controller("MyCtrl", function($scope) {
     $scope.test = 'Test Message';
@@ -42,7 +42,7 @@ angular.module("main", []).controller("MyCtrl", function($scope) {
         }
 	};
 });
-
+ */
 
 /* 
 angular.module('demo', []).

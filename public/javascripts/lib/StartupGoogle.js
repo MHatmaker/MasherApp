@@ -7,6 +7,17 @@
 
 var isGoogleLoaded = false;
 var isPlacesLoaded = false;
+var isGeoCoderLoaded = false;
+var testVar = false;
+
+var googleComponents = {
+    google : null,
+    googlemap : null,
+    places : null,
+    searchbox : null,
+    geocoder : null,
+    mapholder : null
+};
 
 function loadScript(scrpt, loadedTest, callback) {
     var script = document.createElement('script');
@@ -20,9 +31,8 @@ function loadScript(scrpt, loadedTest, callback) {
         }
         
         // script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&'  + 'callback=skipScript';
-        loadedTest = true;
         document.body.appendChild(script);
-        script.src = scrpt + '&callback=' + callback;
+        script.src = scrpt; // + '&callback=' + callback;
         console.log('loadScript after append');
     }
     else{
@@ -34,8 +44,53 @@ function skipScript() {
     console.log('skipScript');
 }
 
+function waitForGoogle(){
+    if(testVar == false){
+        console.log("wait a little longer");
+        setTimeout(waitForGoogle, 50);
+        return;
+    }
+    return;
+}
+
+function initGoogleMap() {
+    console.log('initGoogleMap');
+    var mapOptions = {
+      center: new google.maps.LatLng(41.8, -87.7),
+      // center: new google.maps.LatLng(51.50, -0.09),
+      zoom: 13,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    console.log("create a google map with option: " + mapOptions.mapTypeId);
+    var gMap = new google.maps.Map(document.getElementById("map_canvas"),
+        mapOptions);
+    googleComponents['googlemap'] = gmap;
+    isGoogleLoaded = true;
+}
+
 function initPlaces() {
-    console.log('skipScript');
+    console.log('initPlaces');
+    var searchInput = /** @type {HTMLInputElement} */(
+        document.getElementById('pac-input'));
+        
+            geoCoder = new google.maps.Geocoder();
+    var mphmap = googleComponents.googlemap;
+    var google = googleComponents.google;
+    mphmap.controls[google.maps.ControlPosition.TOP_LEFT].push(searchInput);
+
+    var places = new google.places();
+    googleComponents['places'] = places;
+    
+    var searchBox = new places.SearchBox(/** @type {HTMLInputElement} */(searchInput));
+    googleComponents['searchbox'] = searchBox;
+    
+    var mph = googleComponents.mapholder; 
+    // mph = MapHosterGoogle.start(); 
+    googleComponents['google'] = google;
+    mph.config(googleComponents);
+    // MapHosterGoogle.config(gMap, google, google.maps.places);
+    mph.resizeWebSite(true);
+    isPlacesLoaded = true;
 }
 
 // window.onload = loadScript;
@@ -46,8 +101,8 @@ function initPlaces() {
 
     console.log('StartupGoogle setup');
     define([
-        'lib/MapHosterGoogle',
-        'https://maps.googleapis.com/maps/api/js?key=AIzaSyAwAOGAxY5PZ8MshDtaJFk2KgK7VYxArPA&callback=skipScript' //,
+        'lib/MapHosterGoogle' //,
+        // 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAwAOGAxY5PZ8MshDtaJFk2KgK7VYxArPA&callback=skipScript' //,
         //'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places'
     ], function(MapHosterGoogle, AgoNewWindowConfig) {
         console.log('StartupGoogle define');
@@ -57,10 +112,12 @@ function initPlaces() {
         var loading;
         var newSelectedWebMapId = "";
         // loadScript();
-        console.debug(google);
+        // console.debug(google);
+        googleComponents.mapholder = MapHosterGoogle;
 
         function getMap(){
-            return gMap;
+            // return gMap;
+            return googleComponents.googlemap;
         }
         
         function resizeWebSiteVertical(isMapExpanded){
@@ -138,21 +195,32 @@ function initPlaces() {
                 var evtSvc = $inj.get('StompEventHandlerService');
                 evtSvc.addEvent('client-MapXtntEvent', MapHosterGoogle.retrievedBounds);
                 evtSvc.addEvent('client-MapClickEvent',  MapHosterGoogle.retrievedClick);
+                var googlemapUrl = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAwAOGAxY5PZ8MshDtaJFk2KgK7VYxArPA&callback=initGoogleMap';
+                
             
-                var mapOptions = {
-                  center: new google.maps.LatLng(41.8, -87.7),
-                  // center: new google.maps.LatLng(51.50, -0.09),
-                  zoom: 13,
-                  mapTypeId: google.maps.MapTypeId.ROADMAP
-                };
-                console.log("create a google map with option: " + mapOptions.mapTypeId);
-                gMap = new google.maps.Map(document.getElementById("map_canvas"),
-                    mapOptions);
+                loadScript(googlemapUrl, 
+                            isGoogleLoaded,
+                            function(){
+                                console.log('google-loader has been loaded, but not the maps-API ');});
                 // mph = new MapHosterGoogle(gMap); 
-                loadScript('https://maps.googleapis.com/maps/api/js?libraries=places', isPlacesLoaded);
+                testVar = isGoogleLoaded;
+                waitForGoogle(isGoogleLoaded);
+                
+                var placesLoadedUrl = 'https://maps.googleapis.com/maps/api/js?libraries=places&callback=initPlaces';
+                
+                loadScript(placesLoadedUrl, isPlacesLoaded,
+                            function(){
+                                console.log('google-loader has been loaded, but not the places-API ');});
+                                
+                testVar = isPlacesLoaded;                                   
+                waitForGoogle(isPlacesLoaded);
+                         /*        
                 mph = MapHosterGoogle.start(); 
-                MapHosterGoogle.config(gMap, google, google.maps.places);
+                googleComponents['google'] = google;
+                MapHosterGoogle.config(googleComponents);
+                // MapHosterGoogle.config(gMap, google, google.maps.places);
                 MapHosterGoogle.resizeWebSite(true);
+                 */
             }
         } 
         function StartupGoogle() {

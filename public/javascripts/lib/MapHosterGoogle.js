@@ -37,7 +37,11 @@
         };
         var popDetails = null;
                       
-        function configureMap(gMap, goooogle, googPlaces) {
+        function configureMap(googleComponents) {  // gMap, goooogle, googPlaces) {
+            mphmap = googleComponent.googlemap;
+            google = googleComponents.google;
+            
+            
             mphmap = gMap;
             google = goooogle;
             geoCoder = new google.maps.Geocoder();
