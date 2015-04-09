@@ -72,6 +72,8 @@
             collectScales(zoomLevels);
             AgoNewWindowConfig.showConfigDetails('MapHosterGoogle - after collectScales');
             showGlobals("after collectScales");
+            var pacnpt = $('#pac-input');
+            pacnpt.value = '';
 
             google.maps.event.addListenerOnce(mphmap, 'tilesloaded', function(){
                 var zsvc = new google.maps.MaxZoomService();
@@ -86,6 +88,32 @@
                 google.maps.event.trigger(mphmap, 'resize');
                 mphmap.setCenter(center);
 
+                var pacnpt = $('#pac-input');
+                var qtext = AgoNewWindowConfig.query();
+                if(qtext != ''){
+                    searchFiredFromUrl = true;
+                }
+                pacnpt[0].value = qtext;
+                pacnpt.focus();
+                pacnpt[0].onkeypress = function(e){
+                    if(e.keyCode === 13){
+                        // alert("Enter was pressed");
+                        console.log("Enter key was pressed, firePlacesQuery");
+                        firePlacesQuery();
+                        return true;
+                    }
+                    else{
+                        if(searchFiredFromUrl == true){
+                            console.log('ignore keypress with keyCode ' + e.keyCode);
+                            return false;
+                        }
+                        else{
+                            console.log('keypress handler returning true with keyCode' + e.keyCode);
+                            return true;
+                        }
+                    }
+                }
+
                 // Listen for the event fired when the user selects an item from the
                 // pick list. Retrieve the matching places for that item.
                 google.maps.event.addListener(searchBox, 'places_changed', function() {
@@ -99,7 +127,17 @@
                         var ur = new google.maps.LatLng(bnds.ury, bnds.urx);
                         var gBnds = new google.maps.LatLngBounds(ll, ur);
                         searchBox.setBounds(gBnds);
-                        searchFiredFromUrl = false;
+                        var tSW = gBnds.getSouthWest();
+                        var tNE = gBnds.getNorthEast();
+                        console.log('SW x, y: ' + tSW.lng() + ', ' + tSW.lat());
+                        console.log('NE x, y: ' + tNE.lng() + ', ' + tNE.lat());
+                        console.log("Sanity check on searchBox bounds");
+                        var newlySetBounds = searchBox.getBounds();
+                        tSW = newlySetBounds.getSouthWest();
+                        tNE = newlySetBounds.getNorthEast();
+                        console.log('SW x, y: ' + tSW.lng() + ', ' + tSW.lat());
+                        console.log('NE x, y: ' + tNE.lng() + ', ' + tNE.lat());
+                        // searchFiredFromUrl = false;
 
                         var qtext = AgoNewWindowConfig.query();
                         // searchInput.value = qtext;
@@ -107,20 +145,42 @@
                         var pacnpt = $('#pac-input');
                         pacnpt.value = qtext;
                         pacnpt.focus();
-                        var paccon = $('#pac-container');
-                        // console.debug(paccon);
-                        // console.debug(paccon.contents());
-                        var firstResult = $(".pac-container .pac-item:first").text();
-                        console.debug(firstResult);
-                        console.log('trigger keypress event on pac-input');
-                        pacnpt.trigger(jQuery.Event('keydown', {keyCode:13, which: 13}));
-                        console.log('trigger keydown event on pac_container');
+                        // pacnpt[0].onkeyup = function(e){
+                        //     if(e.keyCode === 13){
+                        //         alert("Enter was pressed");
+                        //         firePlacesQuery();
+                        //     }
+                        //     return false;
+                        // }
+                        // var paccon = $('#pac-container');
+                        // // console.debug(paccon);
+                        // // console.debug(paccon.contents());
+                        // var firstResult = $(".pac-container .pac-item:first").text();
+                        // var firstItem = $(".pac-container .pac-item:first");
+                        // firstItem.click();
+                        // console.debug(firstResult);
+                        //
+                        // console.log('trigger keypress event on pac-input');
+                        // pacnpt.trigger(jQuery.Event('keydown', {keyCode:13, which: 13}));
+                        // pacnpt.trigger(jQuery.Event('keydown', {keyCode:32, which:32}));
+                        // pacnpt.trigger(jQuery.Event('keyup', {keyCode:32, which:32}));
+                        // console.log('trigger keydown event on pac_container');
+                        // var evnt = jQuery.Event('keydown');
+                        // evnt.which = 13;
+                        // evnt.keyCode = 13;
+                        // pacnpt.trigger(evnt);
+                        //
+                        // //pacnpt.keypress();
+                        // // pacnpt.trigger(jQuery.Event('keydown', {keyCode:40, which:40}));
+                        // // pacnpt.trigger(jQuery.Event('keydown', {keyCode:40, which:40}));
+                        // paccon.trigger(jQuery.Event('keydown', {keyCode:40, which:40}));
                         // pacnpt.trigger(jQuery.Event('keydown', {keyCode:40, which:40}));
-                        // pacnpt.trigger(jQuery.Event('keydown', {keyCode:40, which:40}));
-                        paccon.trigger(jQuery.Event('keydown', {keyCode:40, which:40}));
-                        pacnpt.trigger(jQuery.Event('keydown', {keyCode:40, which:40}));
-                        pacnpt.trigger(jQuery.Event('keydown', {keyCode:13, which: 13}));
+                        // pacnpt.trigger(jQuery.Event('keydown', {keyCode:13, which: 13}));
+                        // pacnpt.trigger(jQuery.Event('keyup', {keyCode:13, which: 13}));
+
                     }
+                    var point = mphmap.getCenter();
+                    mphmap.setCenter(point);
                     var places = searchBox.getPlaces();
                     console.log("after searchBox.getPlaces()");
                     if(places && places.length > 0){
@@ -134,10 +194,15 @@
                         // var pacnpt = $('#pac-input');
                         // console.log('trigger keypress event on pac-input');
                         // pacnpt.trigger(jQuery.Event('keypress', {which: 20}));
-                        // pacnpt.trigger(jQuery.Event('keypress', {which: 13}));
+                        var pacnpt = $('#pac-input');
+                        if(searchFiredFromUrl == true){
+                            console.log('searchFiredFromUrl is true, set to false, trigger keypress')
+                            searchFiredFromUrl = false;
+                            pacnpt.trigger(jQuery.Event('keypress', {keyCode:13, which: 13}));
+                        }`  `
                     }
                 });
-
+                /*
                 zsvc.getMaxZoomAtLatLng(cntr, function(response)
                 {
                     if (response && response['status'] == google.maps.MaxZoomStatus.OK)
@@ -163,8 +228,14 @@
 
                     }
                   });
-                  firePlacesQuery();
+                  */
+                  //firePlacesQuery();
+                  if(searchFiredFromUrl == true){
+                      console.log('searchFiredFromUrl is true at end of case, fire keypress')
+                      pacnpt.trigger(jQuery.Event('keypress', {keyCode:13, which: 13}));
+                  }
             });
+
             // google.maps.event.trigger(mphmap, 'resize');
 
             searchInput = /** @type {HTMLInputElement} */(
@@ -261,7 +332,7 @@
             }
 
             function firePlacesQuery(){
-                searchFiredFromUrl = true;
+                // searchFiredFromUrl = true;
                 searchInput.value = 'foo';
                 var text = AgoNewWindowConfig.query();
 
@@ -273,6 +344,11 @@
                 var ur = new google.maps.LatLng(bnds.ury, bnds.urx);
                 var gBnds = new google.maps.LatLngBounds(ll, ur);
 
+                var tSW = gBnds.getSouthWest();
+                var tNE = gBnds.getNorthEast();
+                console.log('SW x, y: ' + tSW.lng() + ', ' + tSW.lat());
+                console.log('NE x, y: ' + tNE.lng() + ', ' + tNE.lat());
+
                 // var arr= [];
                 // console.debug(arr);
                 // arr.push('\r'); //0x0d);
@@ -283,6 +359,13 @@
                 console.log(searchInput.value);
                 console.log("set bounds and trigger the places_changed event");
                 searchBox.setBounds(gBnds);
+                console.log("Sanity check on searchBox bounds");
+                var newlySetBounds = searchBox.getBounds();
+                tSW = newlySetBounds.getSouthWest();
+                tNE = newlySetBounds.getNorthEast();
+                console.log('SW x, y: ' + tSW.lng() + ', ' + tSW.lat());
+                console.log('NE x, y: ' + tNE.lng() + ', ' + tNE.lat());
+
                 google.maps.event.trigger(searchBox, 'places_changed');
             }
             selfMethods["firePlacesQuery"] = firePlacesQuery;
