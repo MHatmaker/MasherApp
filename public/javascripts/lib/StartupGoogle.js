@@ -155,11 +155,12 @@ function initPlaces() {
                 };
 
                 var canelem = document.getElementById('map_canvas');
-                // console.log("before first invalidate : " + canelem.clientHeight);
-                // invalidateMapWrapper();
+                console.log("before first invalidate : " + canelem.clientHeight);
+                invalidateMapWrapper();
                 canelem = document.getElementById('map_canvas');
                 console.log("before map create : " + canelem.clientHeight);
                 console.log("create a google map with option: " + mapOptions.mapTypeId);
+
                 gMap = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
                 canelem = document.getElementById('map_canvas');
                 console.log("before second invalidate : " + canelem.clientHeight);
@@ -217,14 +218,16 @@ function initPlaces() {
             var element = 'map_wrapper';
             console.log("MapHosterGoogle map_wrapper : invalidateSize");
             // gMap.invalidateSize(true);
-            var wrapHgt = getElemDimension(element, 'height') + 1;
-            console.log('reset ' + element + ' height to ' + wrapHgt);
-            setElementDimension(element, 'height', wrapHgt);
 
             var wrapWdth = getElemDimension(element, 'width');
             console.log('reset ' + element + ' width to ' + wrapWdth);
             setElementDimension(element, 'width', wrapWdth);
 
+            var wrapHgt = getElemDimension(element, 'height') + 1;
+            console.log('reset ' + element + ' height to ' + wrapHgt);
+            setElementDimension(element, 'height', wrapHgt);
+
+            /*
             element = 'map_canvas';
             // gMap.invalidateSize(true);
             // var cnvsHgt = '100'; // wrapHgt; //getElemDimension(element, 'height') + 1;
@@ -234,6 +237,7 @@ function initPlaces() {
             var cnvsWdth = getElemDimension(element, 'width');
             console.log('reset ' + element + ' width to ' + cnvsWdth);
             setElementDimension(element, 'width', cnvsWdth);
+            */
         }
 
         function StartupGoogle() {
