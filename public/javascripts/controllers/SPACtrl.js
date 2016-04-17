@@ -118,7 +118,7 @@
                         $scope.innerTblHeight = colHgt + utils.getTopRowHeight() + utils.getFooterHeight() - innerTableAdjustment;
                         utils.setElementHeight('idCenterCol', colHgt - colHeightAdjustment);
                         utils.setElementHeight('map_wrapper', colHgt - colHeightAdjustment);
-                        console.log("adjustHeights colHgt : " + colHgt);
+                        console.log("in adjustHeights after utils setElementHeight calls, with colHgt : " + colHgt);
                         if (invalidateMapPane && invalidateMapPane === true) {
                             console.log("NNNOOOWWW invalidateMapPane with CollapseSummaryCompletionEvent");
                             $scope.$broadcast('CollapseSummaryCompletionEvent');
@@ -240,16 +240,16 @@
             };
 
             $scope.$on('CollapseSummaryEvent', function (event, args) {
-                $scope.MasterSiteVis = args.mastersitevis;
-                console.log("on CollapseSummaryEvent, call adjustHeights");
-                var innerScope = $scope;
-                setTimeout(function () {
-                    innerScope.$apply(function () {
-                        utils.calculateComponentHeights($scope.MasterSiteVis, $scope.SiteVis);
-                        utils.displayHeights("####  CollapseSummaryEvent  ###");
-                        adjustHeights($scope, true);
-                    });
-                }, 1000);
+                // $scope.MasterSiteVis = args.mastersitevis;
+                // console.log("on CollapseSummaryEvent, call adjustHeights");
+                // var innerScope = $scope;
+                // setTimeout(function () {
+                //     innerScope.$apply(function () {
+                //         utils.calculateComponentHeights($scope.MasterSiteVis, $scope.SiteVis);
+                //         utils.displayHeights("####  CollapseSummaryEvent  ###");
+                //         adjustHeights($scope, true);
+                //     });
+                // }, 1000);
 
             });
 
@@ -262,6 +262,7 @@
 
             $scope.$on('windowResized', function () {
                 // utils.recalculateTopRow($scope.SiteVis);
+                /*
                 utils.calculateComponentHeights($scope.MasterSiteVis, $scope.SiteVis);
                 var colHgt = utils.getAvailableSiteColumnHeights($scope.MasterSiteVis, status.website);
                 utils.displayHeights("####  windowResized Event  ###");
@@ -282,6 +283,7 @@
                 // utils.setElementHeight('idMasherCtrl', utils.getMasterSiteHeight());
                 // utils.setElementHeight('idMasterSite', 90, '%');
                 // adjustHeights($scope);
+                */
             });
 
             $scope.siteCollapser = function (tf) {
