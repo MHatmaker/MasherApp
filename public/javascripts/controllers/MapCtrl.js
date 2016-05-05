@@ -398,6 +398,7 @@
                     googmph = null,
                     curmph = null,
                     curMapType = '',
+                    evtSvc = null,
                     mpTypeSvc = null;
                 console.log("MapCtrl 'places_changed' listener");
                 console.log("before searchBox.getPlaces()");
@@ -420,6 +421,10 @@
                     googmph = mpTypeSvc.getSpecificMapType('google');
                     curmph = mpTypeSvc.getCurrentMapType();
                     curMapType = mpTypeSvc.getMapTypeKey();
+
+                    evtSvc = $inj.get('StompEventHandlerService');
+                    evtSvc.addEvent('client-MapXtntEvent', curmph.retrievedBounds);
+                    evtSvc.addEvent('client-MapClickEvent', curmph.retrievedClick);
                     gmQSvc = $inj.get('GoogleQueryService');
                     // currentVerbVis = gmQSvc.setDialogVisibility(true);
                     scope = gmQSvc.getQueryDestinationDialogScope('google');
@@ -478,7 +483,16 @@
                 });
 
                 modalInstance.result.then(function (info) {
+                    var evtSvc = null,
+                        mpTypeSvc = null,
+                        mph = null;
                     $scope.updateState(info.dstSel);
+                    evtSvc = $inj.get('StompEventHandlerService');
+                    mpTypeSvc = $inj.get("CurrentMapTypeService");
+                    mph = mpTypeSvc.getSpecificMapType($scope.data.mapType);
+                    evtSvc.addEvent('client-MapXtntEvent', mph.retrievedBounds);
+                    evtSvc.addEvent('client-MapClickEvent', mph.retrievedClick);
+
                     $scope.data.callback(info.dstSel, info.mapType);
                 }, function () {
                     console.log('Modal dismissed at: ' + new Date());

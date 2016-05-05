@@ -294,6 +294,9 @@
         StompSetupCtrl.prototype.setupPusherClient = function (eventDct, userName, cbfn, nfo) {
             selfdict.eventDct = eventDct;
             selfdict.userName = userName;
+            if (selfdict.scope) {
+                selfdict.scope.data.userName = userName;
+            }
             selfdict.callbackFunction = cbfn;
             selfdict.info = nfo;
             selfdict.displayPusherDialog();
@@ -301,8 +304,14 @@
 
 
         StompSetupCtrl.prototype.createPusherClient = function (eventDct, pusherChannel, initName, cbfn, nfo) {
+            var evtSvc = null,
+                mph = nfo.currentMapHolder;
+
             console.log("StompSetupCtrl.createPusherClient");
-            selfdict.eventDct = eventDct;
+            evtSvc = $inj.get('StompEventHandlerService');
+            evtSvc.addEvent('client-MapXtntEvent', mph.retrievedBounds);
+            evtSvc.addEvent('client-MapClickEvent', mph.retrievedClick);
+            selfdict.eventDct = evtSvc.getEventDictionary();
             selfdict.userName = initName;
             if (selfdict.scope) {
                 selfdict.scope.data.userName = initName;
