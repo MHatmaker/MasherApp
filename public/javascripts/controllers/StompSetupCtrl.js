@@ -308,9 +308,9 @@
                 mph = nfo.currentMapHolder;
 
             console.log("StompSetupCtrl.createPusherClient");
-            evtSvc = $inj.get('StompEventHandlerService');
-            evtSvc.addEvent('client-MapXtntEvent', mph.retrievedBounds);
-            evtSvc.addEvent('client-MapClickEvent', mph.retrievedClick);
+            // evtSvc = $inj.get('StompEventHandlerService');
+            // evtSvc.addEvent('client-MapXtntEvent', mph.retrievedBounds);
+            // evtSvc.addEvent('client-MapClickEvent', mph.retrievedClick);
             selfdict.eventDct = evtSvc.getEventDictionary();
             selfdict.userName = initName;
             if (selfdict.scope) {

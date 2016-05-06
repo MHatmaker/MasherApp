@@ -422,9 +422,9 @@
                     curmph = mpTypeSvc.getCurrentMapType();
                     curMapType = mpTypeSvc.getMapTypeKey();
 
-                    evtSvc = $inj.get('StompEventHandlerService');
-                    evtSvc.addEvent('client-MapXtntEvent', curmph.retrievedBounds);
-                    evtSvc.addEvent('client-MapClickEvent', curmph.retrievedClick);
+                    // evtSvc = $inj.get('StompEventHandlerService');
+                    // evtSvc.addEvent('client-MapXtntEvent', curmph.retrievedBounds);
+                    // evtSvc.addEvent('client-MapClickEvent', curmph.retrievedClick);
                     gmQSvc = $inj.get('GoogleQueryService');
                     // currentVerbVis = gmQSvc.setDialogVisibility(true);
                     scope = gmQSvc.getQueryDestinationDialogScope('google');
@@ -489,9 +489,9 @@
                     $scope.updateState(info.dstSel);
                     evtSvc = $inj.get('StompEventHandlerService');
                     mpTypeSvc = $inj.get("CurrentMapTypeService");
-                    mph = mpTypeSvc.getSpecificMapType($scope.data.mapType);
-                    evtSvc.addEvent('client-MapXtntEvent', mph.retrievedBounds);
-                    evtSvc.addEvent('client-MapClickEvent', mph.retrievedClick);
+                    // mph = mpTypeSvc.getSpecificMapType($scope.data.mapType);
+                    // evtSvc.addEvent('client-MapXtntEvent', mph.retrievedBounds);
+                    // evtSvc.addEvent('client-MapClickEvent', mph.retrievedClick);
 
                     $scope.data.callback(info.dstSel, info.mapType);
                 }, function () {

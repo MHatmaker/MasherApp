@@ -317,8 +317,8 @@
                 if (AgoNewWindowConfig.isNameChannelAccepted() === false) {
                     $inj = angular.injector(['app']);
                     evtSvc = $inj.get('StompEventHandlerService');
-                    evtSvc.addEvent('client-MapXtntEvent', curmph.retrievedBounds);
-                    evtSvc.addEvent('client-MapClickEvent',  curmph.retrievedClick);
+                    // evtSvc.addEvent('client-MapXtntEvent', sourceMapType.retrievedBounds);
+                    // evtSvc.addEvent('client-MapClickEvent',  sourceMapType.retrievedClick);
 
                     // gmQSvc = $inj.get('GoogleQueryService');
                     // scope = gmQSvc.getPusherDialogScope();

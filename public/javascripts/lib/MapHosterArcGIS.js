@@ -569,9 +569,9 @@
                     }
                 }
 
-                // pusher.subscribe( 'client-MapXtntEvent', retrievedBounds);
-                // pusher.subscribe( 'client-MapClickEvent', retrievedClick);
-                // pusher.subscribe( 'client-NewMapPosition', retrievedNewPosition);
+                pusher.subscribe( 'client-MapXtntEvent', retrievedBounds);
+                pusher.subscribe( 'client-MapClickEvent', retrievedClick);
+                pusher.subscribe( 'client-NewMapPosition', retrievedNewPosition);
                 console.log("reset MapHosterArcGIS setPusherClient, selfPusherDetails.pusher " +  selfPusherDetails.pusher);
             }
         }
